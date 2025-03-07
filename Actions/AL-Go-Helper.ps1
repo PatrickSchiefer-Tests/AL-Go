@@ -865,7 +865,13 @@ function ResolveProjectFolders {
         if (!$appFolders -and !$testFolders -and !$bcptTestFolders) {
             Get-ChildItem -Path $projectPath -Recurse | Where-Object { $_.PSIsContainer -and (Test-Path -Path (Join-Path $_.FullName "app.json")) } | ForEach-Object {
                 $aLProjectFolder = $_
+                Write-Host "Analyze $aLProjectFolder"
                 $appJson = Get-Content (Join-Path $aLProjectFolder.FullName "app.json") -Encoding UTF8 | ConvertFrom-Json
+                
+                Write-Host "App.json"
+                $appJson
+                Write-Host "App.json"
+                $testRunnerApps
 
                 $isTestApp = $false
                 $isBcptTestApp = $false
